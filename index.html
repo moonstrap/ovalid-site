@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ovalid — ID photos that pass</title>
+<meta name="description" content="Ovalid measures your passport and ID photo against the ISO standard used at EU borders — and never edits a pixel. Live guidance, real scores, compliant crops. Everything on your phone.">
+<meta property="og:title" content="Ovalid — ID photos that pass">
+<meta property="og:description" content="Measured, never edited. Live guidance and real ISO/IEC 29794-5 scoring for passport and visa photos, entirely on your phone.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ovalid.app">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23172347'/%3E%3Cellipse cx='32' cy='34' rx='14' ry='19' fill='none' stroke='%23f5edcc' stroke-width='3.4' stroke-dasharray='7 4.5'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --navy: #131e3d;
+    --navy-2: #1d2c5a;
+    --cream: #f5edcc;
+    --cream-dim: rgba(245, 237, 204, 0.75);
+    --white: #ffffff;
+    --ink: #1a2033;
+    --ink-soft: #4c5568;
+    --paper: #f7f7f9;
+    --pass: #2ea25e;
+    --line: rgba(19, 30, 61, 0.12);
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.6;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 0 24px; }
+
+  /* Hero */
+  header {
+    background: linear-gradient(140deg, var(--navy) 0%, var(--navy-2) 100%);
+    color: var(--white);
+    overflow: hidden;
+  }
+  nav {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 22px 0;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 20px; letter-spacing: 0.01em; }
+  .brand svg { display: block; }
+  nav a.gh {
+    color: var(--cream-dim); text-decoration: none; font-size: 14px; font-weight: 600;
+  }
+  nav a.gh:hover { color: var(--cream); }
+  .hero {
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px;
+    align-items: center; padding: 56px 0 88px;
+  }
+  .hero h1 {
+    font-size: clamp(34px, 5vw, 52px); line-height: 1.12;
+    letter-spacing: -0.02em; font-weight: 800;
+  }
+  .hero h1 em { font-style: normal; color: var(--cream); }
+  .hero p.lede {
+    margin-top: 18px; font-size: 18px; color: rgba(255,255,255,0.82); max-width: 46ch;
+  }
+  .pledge {
+    margin-top: 26px; display: inline-flex; align-items: center; gap: 10px;
+    background: rgba(255,255,255,0.08); border: 1px solid rgba(245,237,204,0.25);
+    padding: 12px 16px; border-radius: 12px; font-weight: 600; font-size: 15px;
+    color: var(--cream);
+  }
+  .cta-row { margin-top: 30px; display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
+  .cta {
+    background: var(--cream); color: var(--navy); font-weight: 700;
+    padding: 14px 22px; border-radius: 12px; text-decoration: none; font-size: 16px;
+  }
+  .cta.soon { cursor: default; }
+  .cta-note { color: rgba(255,255,255,0.6); font-size: 14px; }
+
+  /* Phone mockup */
+  .phone-slot { display: flex; justify-content: center; }
+
+  /* Sections */
+  section { padding: 72px 0; }
+  section.alt { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  h2 { font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -0.015em; line-height: 1.2; }
+  .kicker {
+    text-transform: uppercase; letter-spacing: 0.12em; font-size: 12px; font-weight: 700;
+    color: var(--ink-soft); margin-bottom: 10px;
+  }
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
+  .card {
+    background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
+  }
+  section.alt .card { background: var(--paper); }
+  .card .num {
+    display: inline-flex; width: 30px; height: 30px; border-radius: 50%;
+    background: var(--navy); color: var(--cream); font-weight: 700; font-size: 14px;
+    align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .card h3 { font-size: 18px; margin-bottom: 8px; }
+  .card p { color: var(--ink-soft); font-size: 15px; }
+
+  .why { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .why p { color: var(--ink-soft); margin-top: 14px; }
+  .why strong { color: var(--ink); }
+  blockquote {
+    border-left: 3px solid var(--navy); padding: 4px 0 4px 18px; margin-top: 20px;
+    color: var(--ink); font-weight: 600; font-size: 17px;
+  }
+  blockquote span { display: block; font-weight: 400; color: var(--ink-soft); font-size: 14px; margin-top: 6px; }
+
+  .flags { margin-top: 28px; display: flex; flex-wrap: wrap; gap: 10px; }
+  .flag-chip {
+    background: var(--white); border: 1px solid var(--line); border-radius: 999px;
+    padding: 8px 14px; font-size: 14px; font-weight: 600;
+  }
+  section.alt .flag-chip { background: var(--paper); }
+  .flags-note { margin-top: 14px; color: var(--ink-soft); font-size: 14px; }
+
+  .privacy-list { margin-top: 24px; display: grid; gap: 12px; }
+  .privacy-list li {
+    list-style: none; display: flex; gap: 12px; align-items: baseline;
+    color: var(--ink-soft); font-size: 15.5px;
+  }
+  .privacy-list li::before { content: "✓"; color: var(--pass); font-weight: 800; }
+
+  footer {
+    background: var(--navy); color: rgba(255,255,255,0.65);
+    padding: 44px 0; font-size: 14px;
+  }
+  footer .wrap { display: grid; gap: 10px; }
+  footer a { color: var(--cream-dim); text-decoration: none; }
+  footer a:hover { color: var(--cream); }
+  footer .fine { font-size: 12.5px; color: rgba(255,255,255,0.45); max-width: 72ch; }
+
+  @media (max-width: 820px) {
+    .hero { grid-template-columns: 1fr; padding: 36px 0 64px; }
+    .phone-slot { order: -1; }
+    .phone-slot svg { width: 200px; height: auto; }
+    .grid3 { grid-template-columns: 1fr; }
+    .why { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <nav>
+      <div class="brand">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+          <rect width="64" height="64" rx="14" fill="#0e1730"/>
+          <ellipse cx="32" cy="34" rx="14" ry="19" fill="none" stroke="#f5edcc" stroke-width="3.4" stroke-dasharray="7 4.5"/>
+        </svg>
+        Ovalid
+      </div>
+      <a class="gh" href="https://github.com/moonstrap" rel="noopener">Moonstrap</a>
+    </nav>
+
+    <div class="hero">
+      <div>
+        <h1>ID photos that <em>pass</em>.<br>Measured, never edited.</h1>
+        <p class="lede">
+          Ovalid guides you to a compliant passport or visa photo with live,
+          metric feedback — then scores it against the same ISO standard used
+          at EU borders. It measures and crops. It never touches a pixel.
+        </p>
+        <div class="pledge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M12 2l8 3.5v5.2c0 5-3.4 9.6-8 11.3-4.6-1.7-8-6.3-8-11.3V5.5L12 2z" stroke="#f5edcc" stroke-width="1.8"/>
+            <path d="M8.5 12l2.4 2.4 4.6-4.8" stroke="#f5edcc" stroke-width="1.8" stroke-linecap="round"/>
+          </svg>
+          No AI retouching. No background replacement. Every pixel stays yours.
+        </div>
+        <div class="cta-row">
+          <span class="cta soon">Coming soon to the App&nbsp;Store</span>
+          <span class="cta-note">iPhone · everything on device</span>
+        </div>
+      </div>
+
+      <div class="phone-slot">
+        <!-- Stylized app mockup -->
+        <svg width="250" height="480" viewBox="0 0 250 480" role="img" aria-label="Stylized Ovalid capture screen with head-placement oval and passing checks">
+          <rect x="4" y="4" width="242" height="472" rx="38" fill="#0e1730" stroke="rgba(245,237,204,0.35)" stroke-width="2"/>
+          <rect x="16" y="16" width="218" height="448" rx="28" fill="#25324f"/>
+          <rect x="96" y="26" width="58" height="14" rx="7" fill="#0e1730"/>
+          <!-- dim mask + oval -->
+          <ellipse cx="125" cy="200" rx="62" ry="86" fill="#31415f"/>
+          <ellipse cx="125" cy="200" rx="62" ry="86" fill="none" stroke="#3fbf77" stroke-width="3.5" stroke-dasharray="11 7"/>
+          <!-- abstract head/shoulders -->
+          <circle cx="125" cy="182" r="32" fill="#8fa1bd"/>
+          <path d="M75 292c8-34 28-48 50-48s42 14 50 48z" fill="#8fa1bd"/>
+          <!-- prompt chip -->
+          <rect x="63" y="62" width="124" height="26" rx="13" fill="rgba(0,0,0,0.55)"/>
+          <circle cx="79" cy="75" r="4" fill="#3fbf77"/>
+          <text x="90" y="80" font-family="-apple-system, Helvetica, sans-serif" font-size="12" font-weight="600" fill="#ffffff">Hold still</text>
+          <!-- check rows -->
+          <g font-family="-apple-system, Helvetica, sans-serif" font-size="11" fill="#dfe6f2">
+            <rect x="34" y="318" width="182" height="112" rx="14" fill="#1a2747"/>
+            <circle cx="52" cy="340" r="6" fill="#3fbf77"/><text x="66" y="344">Head size · 59%</text>
+            <circle cx="52" cy="366" r="6" fill="#3fbf77"/><text x="66" y="370">Eyes · 62% from bottom</text>
+            <circle cx="52" cy="392" r="6" fill="#3fbf77"/><text x="66" y="396">Plain white background</text>
+            <circle cx="52" cy="418" r="6" fill="#3fbf77"/><text x="66" y="422">Even face lighting</text>
+          </g>
+          <circle cx="125" cy="450" r="17" fill="none" stroke="#ffffff" stroke-width="3"/>
+          <circle cx="125" cy="450" r="11" fill="#ffffff"/>
+        </svg>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">How it works</div>
+    <h2>Guided by numbers, not vibes</h2>
+    <div class="grid3">
+      <div class="card">
+        <span class="num">1</span>
+        <h3>Live metric guidance</h3>
+        <p>While you frame the shot, Ovalid measures head position, pose,
+        lighting balance and background — and tells you exactly what to fix:
+        “move closer”, “face the light source”, “find a plain background”.
+        The oval turns green when everything checks out.</p>
+      </div>
+      <div class="card">
+        <span class="num">2</span>
+        <h3>Scored against the real standard</h3>
+        <p>On capture, your photo is assessed by OFIQ — the reference
+        implementation of ISO/IEC 29794-5, the face image quality standard
+        developed for EU border systems. You see actual scores per measure,
+        not a thumbs-up.</p>
+      </div>
+      <div class="card">
+        <span class="num">3</span>
+        <h3>Cropped to your document</h3>
+        <p>Pick your country and document, and Ovalid crops to its exact
+        geometry — head size, eye line, background rule — and exports
+        print-ready and upload-ready files. Cropping is geometry, not
+        alteration.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap why">
+    <div>
+      <div class="kicker">Why “never edited” matters</div>
+      <h2>Most photo apps disqualify your photo</h2>
+      <p>
+        Popular ID-photo apps “fix” your picture with AI background
+        replacement and skin smoothing. That’s exactly what passport
+        authorities prohibit — the US State Department requires the
+        <strong>original, unaltered photo</strong> and checks submissions
+        for software manipulation.
+      </p>
+      <blockquote>
+        Ovalid’s entire design is the opposite: help you take a photo that’s
+        genuinely right, so nothing needs fixing.
+        <span>Measurement and cropping only. No retouching, no relighting, no
+        beauty filter — and vendor camera “enhancement” is switched off at
+        capture.</span>
+      </blockquote>
+    </div>
+    <div>
+      <div class="kicker">Documents</div>
+      <h2>Your country’s rules, built in</h2>
+      <div class="flags">
+        <span class="flag-chip">🇺🇸 US passport</span>
+        <span class="flag-chip">🇺🇸 US visa (DS-160)</span>
+        <span class="flag-chip">🇪🇺 Schengen visa</span>
+        <span class="flag-chip">🇫🇷 France</span>
+        <span class="flag-chip">🇩🇪 Germany</span>
+        <span class="flag-chip">🇬🇧 United Kingdom</span>
+        <span class="flag-chip">🇮🇹 Italy</span>
+        <span class="flag-chip">🇪🇸 Spain</span>
+        <span class="flag-chip">🇨🇦 Canada</span>
+        <span class="flag-chip">🇦🇺 Australia</span>
+        <span class="flag-chip">🇮🇳 India</span>
+        <span class="flag-chip">🇨🇳 China</span>
+        <span class="flag-chip">🇯🇵 Japan</span>
+      </div>
+      <p class="flags-note">
+        Including the rules nobody tells you about — like France rejecting
+        white backgrounds, or China requiring both ears visible. More
+        countries on the way.
+      </p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="kicker">Privacy</div>
+    <h2>Your face never leaves your phone</h2>
+    <ul class="privacy-list">
+      <li>All analysis runs on device — the ISO scoring engine is embedded in the app.</li>
+      <li>No account, no cloud upload, no telemetry, no ads.</li>
+      <li>Your photos stay in the app until you export them yourself.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><strong style="color: var(--cream)">Ovalid</strong> — a <a href="https://github.com/moonstrap" rel="noopener">Moonstrap</a> product.</div>
+    <div class="fine">
+      Quality assessment powered by OFIQ (Open Source Face Image Quality),
+      © Federal Office for Information Security, Germany, MIT license.
+      Ovalid is not affiliated with or endorsed by BSI, eu-LISA, ICAO, or any
+      government agency. Compliance guidance is informational; final
+      acceptance is always determined by the issuing authority.
+    </div>
+    <div class="fine">© 2026 Moonstrap. All rights reserved.</div>
+  </div>
+</footer>
+
+</body>
+</html>
