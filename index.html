@@ -9,7 +9,9 @@
 <meta property="og:description" content="Measured, never edited. Live guidance and real ISO/IEC 29794-5 scoring for passport and visa photos, entirely on your phone.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ovalid.app">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23172347'/%3E%3Cellipse cx='32' cy='34' rx='14' ry='19' fill='none' stroke='%23f5edcc' stroke-width='3.4' stroke-dasharray='7 4.5'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://ovalid.app/icon.png">
+<link rel="apple-touch-icon" href="/icon.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3CclipPath id='c'%3E%3Crect width='64' height='64' rx='14'/%3E%3C/clipPath%3E%3Cg clip-path='url(%23c)'%3E%3Crect width='64' height='64' rx='14' fill='%23172347'/%3E%3Cpath d='M6.3 64 C9.4 49.9 21.3 44.1 32 44.1 C42.8 44.1 54.6 49.9 57.8 64 Z' fill='%23f5edcc'/%3E%3Cellipse cx='32' cy='25.5' rx='13.5' ry='17.25' fill='none' stroke='%23f5edcc' stroke-width='2.9' stroke-dasharray='5.4 4.1'/%3E%3C/g%3E%3C/svg%3E">
 <style>
   :root {
     --navy: #131e3d;
@@ -159,8 +161,12 @@
     <nav>
       <div class="brand">
         <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true">
+          <defs><clipPath id="brandclip"><rect width="64" height="64" rx="14"/></clipPath></defs>
           <rect width="64" height="64" rx="14" fill="#0e1730"/>
-          <ellipse cx="32" cy="34" rx="14" ry="19" fill="none" stroke="#f5edcc" stroke-width="3.4" stroke-dasharray="7 4.5"/>
+          <g clip-path="url(#brandclip)">
+            <path d="M6.3 64 C9.4 49.9 21.3 44.1 32 44.1 C42.8 44.1 54.6 49.9 57.8 64 Z" fill="#f5edcc"/>
+          </g>
+          <ellipse cx="32" cy="25.5" rx="13.5" ry="17.25" fill="none" stroke="#f5edcc" stroke-width="2.9" stroke-dasharray="5.4 4.1"/>
         </svg>
         Ovalid
       </div>
