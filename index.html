@@ -159,7 +159,6 @@
     position: absolute; left: 125px; top: 226px; width: 210px; height: auto;
     border: 4px solid #fff; border-radius: 6px;
     box-shadow: 0 14px 34px rgba(6, 10, 26, 0.35);
-    transform-origin: top left;
     opacity: 0; animation: hvPhoto 11s infinite;
   }
   @keyframes hvPhone {
@@ -180,8 +179,8 @@
   @keyframes hvPhoto {
     0%, 37% { opacity: 0; transform: none; }
     40% { opacity: 1; transform: none; }
-    54%, 88% { opacity: 1; transform: translate(-83px, 100px) scale(0.552); }
-    94%, 100% { opacity: 0; transform: translate(-83px, 100px) scale(0.552); }
+    54%, 88% { opacity: 1; transform: translate(-130px, 53px) scale(0.552); }
+    94%, 100% { opacity: 0; transform: translate(-130px, 53px) scale(0.552); }
   }
   @media (prefers-reduced-motion: reduce) {
     .hv-phone, .hv-flash, .hv-card, .hv-photo { animation: none; }
