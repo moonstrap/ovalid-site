@@ -38,7 +38,6 @@
   .wrap { max-width: 1060px; margin: 0 auto; padding: 0 24px; }
   img { display: block; }
 
-  /* ---------- Header / hero ---------- */
   header {
     background:
       radial-gradient(1200px 600px at 85% -10%, rgba(245,237,204,0.10), transparent 60%),
@@ -89,7 +88,6 @@
   }
   .statline b { display: block; color: var(--cream); font-size: 19px; font-weight: 800; letter-spacing: -0.01em; }
 
-  /* ---------- Device frame ---------- */
   .device {
     border-radius: 40px; overflow: hidden;
     border: 7px solid #0b1226;
@@ -100,8 +98,22 @@
   .device img { width: 100%; height: auto; }
   .phone-slot { display: flex; justify-content: center; }
   .phone-slot .device { width: min(320px, 74vw); transform: rotate(0.001deg); }
+  .heroframes { position: relative; }
+  .heroframes img + img {
+    position: absolute; inset: 0; opacity: 0;
+    animation: heroframe 12s infinite;
+  }
+  .heroframes img:nth-child(2) { animation-delay: 4s; }
+  .heroframes img:nth-child(3) { animation-delay: 8s; }
+  @keyframes heroframe {
+    0% { opacity: 0; }
+    6%, 33% { opacity: 1; }
+    39%, 100% { opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .heroframes img + img { animation: none; }
+  }
 
-  /* ---------- Sections ---------- */
   section { padding: 76px 0; }
   section.alt { background: var(--white); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
   h2 { font-size: clamp(24px, 3.4vw, 34px); letter-spacing: -0.015em; line-height: 1.2; }
@@ -111,7 +123,6 @@
   }
   .sub { color: var(--ink-soft); margin-top: 12px; max-width: 62ch; }
 
-  /* ---------- 2026 rule banner ---------- */
   .rule2026 { background: var(--navy-3); color: rgba(255,255,255,0.85); padding: 34px 0; }
   .rule2026 .wrap { display: flex; gap: 18px; align-items: flex-start; flex-wrap: wrap; }
   .rule2026 .badge {
@@ -122,7 +133,6 @@
   .rule2026 p { flex: 1 1 420px; font-size: 15.5px; max-width: 78ch; }
   .rule2026 strong { color: var(--cream); }
 
-  /* ---------- Carousel ---------- */
   .carousel { position: relative; margin-top: 40px; }
   .rail {
     display: flex; gap: 26px; overflow-x: auto; padding: 8px 4px 22px;
@@ -155,7 +165,6 @@
   .dots button.on { background: var(--navy); transform: scale(1.25); }
   @media (max-width: 700px) { .c-btn { display: none; } }
 
-  /* ---------- Steps ---------- */
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 40px; }
   .card {
     background: var(--white); border: 1px solid var(--line); border-radius: 16px; padding: 24px;
@@ -169,7 +178,6 @@
   .card h3 { font-size: 18px; margin-bottom: 8px; }
   .card p { color: var(--ink-soft); font-size: 15px; }
 
-  /* ---------- Why / countries ---------- */
   .why { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
   .why p { color: var(--ink-soft); margin-top: 14px; }
   .why strong { color: var(--ink); }
@@ -185,7 +193,6 @@
   }
   .flags-note { margin-top: 14px; color: var(--ink-soft); font-size: 14px; }
 
-  /* ---------- Privacy band ---------- */
   .privacy-band {
     background: linear-gradient(140deg, var(--navy-2) 0%, var(--navy) 100%);
     color: rgba(255,255,255,0.85);
@@ -196,7 +203,6 @@
   .privacy-cols strong { display: block; color: var(--cream); font-size: 16px; margin-bottom: 6px; }
   .privacy-cols span { font-size: 14.5px; color: rgba(255,255,255,0.72); }
 
-  /* ---------- Pricing ---------- */
   .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; max-width: 780px; }
   .price-card {
     background: var(--white); border: 1px solid var(--line); border-radius: 18px; padding: 28px;
@@ -300,9 +306,13 @@
       </div>
 
       <div class="phone-slot">
-        <div class="device">
+        <div class="device heroframes">
           <img src="/img/01_capture.png" width="660" height="1434"
-               alt="Ovalid capture screen: live camera view with a green head-placement oval and a 'Hold still' prompt">
+               alt="Ovalid capture screen: live camera view with a green head-placement oval and a 'Snap!' prompt">
+          <img src="/img/02_verdict_pass.png" width="660" height="1434"
+               alt="Ovalid verdict screen: green 'Good to go' banner on a compliant US passport photo">
+          <img src="/img/04_export.png" width="660" height="1434"
+               alt="Ovalid export screen: DS-160-ready 2 by 2 inch photo, ready to save">
         </div>
       </div>
     </div>
