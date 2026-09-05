@@ -98,20 +98,97 @@
   .device img { width: 100%; height: auto; }
   .phone-slot { display: flex; justify-content: center; }
   .phone-slot .device { width: min(320px, 74vw); transform: rotate(0.001deg); }
-  .heroframes { position: relative; }
-  .heroframes img + img {
-    position: absolute; inset: 0; opacity: 0;
-    animation: heroframe 12s infinite;
+  .hero-visual { position: relative; width: 460px; height: 740px; }
+  .hv-phone {
+    position: absolute; left: 73px; top: 37px; width: 314px;
+    animation: hvPhone 11s infinite;
   }
-  .heroframes img:nth-child(2) { animation-delay: 4s; }
-  .heroframes img:nth-child(3) { animation-delay: 8s; }
-  @keyframes heroframe {
-    0% { opacity: 0; }
-    6%, 33% { opacity: 1; }
-    39%, 100% { opacity: 0; }
+  .hv-flash {
+    position: absolute; inset: 0; background: #fff; border-radius: 33px;
+    opacity: 0; animation: hvFlash 11s infinite;
+  }
+  .hv-card {
+    position: absolute; left: 20px; top: 238px; width: 420px; height: 264px;
+    border-radius: 14px; border: 1px solid #c9d2e8;
+    background:
+      radial-gradient(340px 200px at 88% 10%, rgba(196, 30, 58, 0.07), transparent 60%),
+      radial-gradient(300px 220px at 10% 95%, rgba(196, 30, 58, 0.06), transparent 60%),
+      radial-gradient(420px 260px at 50% 0%, rgba(29, 44, 90, 0.10), transparent 65%),
+      repeating-linear-gradient(115deg, rgba(29, 44, 90, 0.035) 0 1px, transparent 1px 7px),
+      #f4f6fb;
+    box-shadow: 0 24px 60px rgba(6, 10, 26, 0.35);
+    opacity: 0; animation: hvCard 11s infinite;
+    font-family: Georgia, "Times New Roman", serif; color: #1d2c5a;
+    overflow: hidden;
+  }
+  .hv-card .doc-head {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 14px 18px 10px;
+    font-size: 17px; font-weight: 700; letter-spacing: 0.24em;
+  }
+  .hv-card .doc-head svg { opacity: 0.85; }
+  .hv-card .doc-slot {
+    position: absolute; left: 22px; top: 88px; width: 116px; height: 116px;
+    border: 1.5px dashed rgba(29, 44, 90, 0.4); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hv-card .doc-slot svg { opacity: 0.35; }
+  .hv-card .doc-fields {
+    position: absolute; left: 158px; top: 84px; right: 18px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 9px 12px;
+  }
+  .hv-card .doc-fields div { min-width: 0; }
+  .hv-card .doc-fields label {
+    display: block; font-size: 8.5px; letter-spacing: 0.14em;
+    color: rgba(29, 44, 90, 0.55); text-transform: uppercase;
+  }
+  .hv-card .doc-fields b { font-size: 13.5px; font-weight: 700; letter-spacing: 0.02em; }
+  .hv-card .doc-mrz {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 8px 18px 10px;
+    font-family: "Courier New", monospace; font-size: 11px; letter-spacing: 0.08em;
+    color: rgba(29, 44, 90, 0.65); background: rgba(255, 255, 255, 0.55);
+    border-top: 1px solid rgba(29, 44, 90, 0.12); white-space: nowrap; overflow: hidden;
+  }
+  .hv-card .doc-specimen {
+    position: absolute; left: 50%; top: 46%;
+    transform: translate(-50%, -50%) rotate(-18deg);
+    font-size: 44px; font-weight: 700; letter-spacing: 0.3em;
+    color: rgba(29, 44, 90, 0.07); pointer-events: none;
+  }
+  .hv-photo {
+    position: absolute; left: 125px; top: 226px; width: 210px; height: auto;
+    border: 4px solid #fff; border-radius: 6px;
+    box-shadow: 0 14px 34px rgba(6, 10, 26, 0.35);
+    transform-origin: top left;
+    opacity: 0; animation: hvPhoto 11s infinite;
+  }
+  @keyframes hvPhone {
+    0%, 38% { opacity: 1; }
+    46%, 88% { opacity: 0; }
+    96%, 100% { opacity: 1; }
+  }
+  @keyframes hvFlash {
+    0%, 34% { opacity: 0; }
+    37% { opacity: 0.85; }
+    41%, 100% { opacity: 0; }
+  }
+  @keyframes hvCard {
+    0%, 38% { opacity: 0; transform: translateY(16px); }
+    48%, 90% { opacity: 1; transform: translateY(0); }
+    97%, 100% { opacity: 0; transform: translateY(16px); }
+  }
+  @keyframes hvPhoto {
+    0%, 37% { opacity: 0; transform: none; }
+    40% { opacity: 1; transform: none; }
+    54%, 88% { opacity: 1; transform: translate(-83px, 100px) scale(0.552); }
+    94%, 100% { opacity: 0; transform: translate(-83px, 100px) scale(0.552); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .heroframes img + img { animation: none; }
+    .hv-phone, .hv-flash, .hv-card, .hv-photo { animation: none; }
+    .hv-card, .hv-photo { opacity: 0; }
+  }
+  @media (max-width: 860px) {
+    .hero-visual { transform: scale(0.72); transform-origin: top center; margin-bottom: -200px; }
   }
 
   section { padding: 76px 0; }
@@ -306,13 +383,39 @@
       </div>
 
       <div class="phone-slot">
-        <div class="device heroframes">
-          <img src="/img/01_capture.png" width="660" height="1434"
-               alt="Ovalid capture screen: live camera view with a green head-placement oval and a 'Snap!' prompt">
-          <img src="/img/02_verdict_pass.png" width="660" height="1434"
-               alt="Ovalid verdict screen: green 'Good to go' banner on a compliant US passport photo">
-          <img src="/img/04_export.png" width="660" height="1434"
-               alt="Ovalid export screen: DS-160-ready 2 by 2 inch photo, ready to save">
+        <div class="hero-visual" aria-label="Animation: a photo is captured in Ovalid, then lands cropped on a stylized specimen travel document">
+          <div class="hv-phone">
+            <div class="device">
+              <img src="/img/01_capture.png" width="660" height="1434"
+                   alt="Ovalid capture screen: live camera view with a green head-placement oval and a 'Snap!' prompt">
+            </div>
+            <div class="hv-flash"></div>
+          </div>
+          <div class="hv-card" aria-hidden="true">
+            <div class="doc-head">
+              PASSPORT
+              <svg width="26" height="26" viewBox="0 0 64 64">
+                <ellipse cx="32" cy="27" rx="14" ry="18" fill="none" stroke="#1d2c5a" stroke-width="3" stroke-dasharray="5.4 4.1"/>
+                <path d="M12 58 C15 46 24 41 32 41 C40 41 49 46 52 58 Z" fill="#1d2c5a"/>
+              </svg>
+            </div>
+            <div class="doc-specimen">SPECIMEN</div>
+            <div class="doc-slot">
+              <svg width="54" height="66" viewBox="0 0 54 66">
+                <ellipse cx="27" cy="33" rx="20" ry="27" fill="none" stroke="#1d2c5a" stroke-width="2.4" stroke-dasharray="5 4"/>
+              </svg>
+            </div>
+            <div class="doc-fields">
+              <div><label>Surname</label><b>TRAVELER</b></div>
+              <div><label>Given names</label><b>HAPPY</b></div>
+              <div><label>Date of birth</label><b>01 JAN 1998</b></div>
+              <div><label>Nationality</label><b>OVALIDIAN</b></div>
+              <div><label>Issued</label><b>05 SEP 2026</b></div>
+              <div><label>Expires</label><b>04 SEP 2036</b></div>
+            </div>
+            <div class="doc-mrz">P&lt;OVL&lt;&lt;TRAVELER&lt;&lt;HAPPY&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;&lt;</div>
+          </div>
+          <img class="hv-photo" src="/img/photo_sq.jpg" width="420" height="420" alt="">
         </div>
       </div>
     </div>
